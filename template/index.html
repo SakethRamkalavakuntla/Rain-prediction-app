@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Rain or Shine: Will It Rain Tomorrow?</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #e0f7fa;
+            padding: 40px;
+        }
+        .form-container {
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.2);
+            max-width: 800px;
+            margin: auto;
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+        }
+        button {
+            margin-top: 25px;
+            width: 100%;
+            padding: 12px;
+            background-color: #00796b;
+            color: white;
+            font-size: 16px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #004d40;
+        }
+        .help-text {
+            font-size: 0.85em;
+            color: #555;
+            margin-top: 2px;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h2>Rain or Shine: Will It Rain Tomorrow?</h2>
+        <form action="/predict" method="post">
+
+            <label>Date</label>
+            <input type="date" name="date" required>
+
+            <label>Location</label>
+            <select name="location" required>
+                {% for loc in locations %}
+                    <option value="{{ loc }}">{{ loc }}</option>
+                {% endfor %}
+            </select>
+
+            <label>Min Temperature (°C)</label>
+            <input type="number" name="mintemp" step="0.1" required>
+
+            <label>Max Temperature (°C)</label>
+            <input type="number" name="maxtemp" step="0.1" required>
+
+            <label>Rainfall (mm)</label>
+            <input type="number" name="rainfall" step="0.1" min="0" max="200" required>
+            <div class="help-text">Typical range: 0 to 200+ mm (Can exceed in storms)</div>
+
+            <label>Evaporation (mm)</label>
+            <input type="number" name="evaporation" step="0.1" min="0" max="25" required>
+            <div class="help-text">Typical range: 0 to 25 mm (High on hot, dry days)</div>
+
+            <label>Sunshine (hours)</label>
+            <input type="number" name="sunshine" step="0.1" min="0" max="14" required>
+            <div class="help-text">Typical range: 0 to 14 hours (Max daylight duration)</div>
+
+            <label>Wind Gust Direction</label>
+            <select name="windgustdir" required>
+                {% for dir in wind_dirs %}
+                    <option value="{{ dir }}">{{ dir }}</option>
+                {% endfor %}
+            </select>
+
+            <label>Wind Gust Speed (km/h)</label>
+            <input type="number" name="windgustspeed" step="0.1" min="0" max="150" required>
+            <div class="help-text">Typical range: 0 to 100+ km/h (Strong storms can exceed 100 km/h)</div>
+
+            <label>Wind Direction 9am</label>
+            <select name="winddir9am" required>
+                {% for dir in wind_dirs %}
+                    <option value="{{ dir }}">{{ dir }}</option>
+                {% endfor %}
+            </select>
+
+            <label>Wind Direction 3pm</label>
+            <select name="winddir3pm" required>
+                {% for dir in wind_dirs %}
+                    <option value="{{ dir }}">{{ dir }}</option>
+                {% endfor %}
+            </select>
+
+            <label>Wind Speed 9am (km/h)</label>
+            <input type="number" name="windspeed9am" step="0.1" min="0" max="60" required>
+            <div class="help-text">Typical range: 0 to 60 km/h (Regular breeze 5–20 km/h)</div>
+
+            <label>Wind Speed 3pm (km/h)</label>
+            <input type="number" name="windspeed3pm" step="0.1" min="0" max="60" required>
+            <div class="help-text">Typical range: 0 to 60 km/h (Regular breeze 5–20 km/h)</div>
+
+            <label>Humidity 9am (%)</label>
+            <input type="number" name="humidity9am" step="0.1" min="10" max="100" required>
+            <div class="help-text">Typical range: 10 to 100% (100% means saturation)</div>
+
+            <label>Humidity 3pm (%)</label>
+            <input type="number" name="humidity3pm" step="0.1" min="10" max="100" required>
+            <div class="help-text">Typical range: 10 to 100% (100% means saturation)</div>
+
+            <label>Pressure 9am (hPa)</label>
+            <input type="number" name="pressure9am" step="0.1" min="980" max="1040" required>
+            <div class="help-text">Typical range: 980 to 1040 hPa (Normal is ~1013 hPa)</div>
+
+            <label>Pressure 3pm (hPa)</label>
+            <input type="number" name="pressure3pm" step="0.1" min="980" max="1040" required>
+            <div class="help-text">Typical range: 980 to 1040 hPa (Normal is ~1013 hPa)</div>
+
+            <label>Cloud 9am (oktas)</label>
+            <input type="number" name="cloud9am" step="1" min="0" max="8" required>
+            <div class="help-text">Typical range: 0 to 8 oktas (0 = clear, 8 = fully overcast)</div>
+
+            <label>Cloud 3pm (oktas)</label>
+            <input type="number" name="cloud3pm" step="1" min="0" max="8" required>
+            <div class="help-text">Typical range: 0 to 8 oktas (0 = clear, 8 = fully overcast)</div>
+
+            <label>Temp 9am (°C)</label>
+            <input type="number" name="temp9am" step="0.1" required>
+
+            <label>Temp 3pm (°C)</label>
+            <input type="number" name="temp3pm" step="0.1" required>
+
+            <label>Rain Today?</label>
+            <select name="raintoday" required>
+                <option value="Yes">Yes</option>
+                <option value="No" selected>No</option>
+            </select>
+
+            <button type="submit">Predict Rainfall</button>
+        </form>
+    </div>
+</body>
+</html>
