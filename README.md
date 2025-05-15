@@ -67,7 +67,7 @@ Deployment to **AWS EC2** involved the following steps:
 ![Input Form](images/form_page.png)
 
 ### 🌧️ Rain Prediction  
-![Rain Result](images/result_rain.png)
+![Rain Result](images/rain.png)
 
 ### ☀️ Sunny Prediction  
-![Sunny Result](images/result_sunny.png)
+![Sunny Result](images/no_rain.png)
