@@ -1,4 +1,4 @@
-# 🌧️ Rainfall Prediction Web App
+# 🌧️ Rainfall Prediction Flask App & AWS Deployment
 
 A Flask-based web application that predicts whether it will rain tomorrow using a machine learning model trained on historical weather data.
 
@@ -14,12 +14,12 @@ The app is deployed on a live **AWS EC2 Ubuntu instance**, providing real-time i
 
 ## 🚀 Features
 
-- Predicts rainfall likelihood based on user input
-- Trained using **XGBoost** for high accuracy
-- Flask app with custom routing and template rendering
-- Simple and responsive frontend with Jinja-powered HTML
-- Hosted and served from an **AWS EC2 instance**
-- Dynamic result views for rainy and sunny predictions
+- Predicts rainfall likelihood based on user input  
+- Trained using **XGBoost** for high accuracy  
+- Flask app with custom routing and template rendering  
+- Simple and responsive frontend with Jinja-powered HTML  
+- Hosted and served from an **AWS EC2 instance**  
+- Dynamic result views for rainy and sunny predictions  
 
 ---
 
@@ -27,24 +27,32 @@ The app is deployed on a live **AWS EC2 Ubuntu instance**, providing real-time i
 
 We began with **Exploratory Data Analysis (EDA)** to uncover insights and clean the dataset for modeling. This was followed by **feature engineering** to enhance model input quality and improve performance.
 
-Multiple machine learning models were evaluated throughout the process. Ultimately, **XGBoost** was selected for its superior accuracy and reliability. The final model was serialized using `pickle` and embedded into the Flask application.
+A variety of machine learning models were tested during experimentation. Ultimately, **XGBoost** was selected due to its superior accuracy and consistency. The final model was serialized using `pickle` and integrated into the Flask application for real-time predictions.
 
-Performance was validated using accuracy scores and a confusion matrix.
+Model performance was validated through accuracy metrics and confusion matrix evaluations.
 
 ---
 
 ## 🌐 Flask App & AWS Deployment
 
-The core of this project is the **Flask web application**, designed with modular, readable code and clear routing logic. It serves a user-friendly HTML form, captures input data, makes predictions using the trained ML model, and dynamically renders result pages.
+The heart of the project lies in the **Flask web application**, which handles:
 
-Deployment to **AWS EC2** involved the following steps:
+- Displaying a user-friendly HTML form for inputs  
+- Capturing and preprocessing form data  
+- Making predictions using the trained model  
+- Dynamically rendering result pages based on the prediction outcome  
 
-- Launching and configuring a Ubuntu EC2 instance
-- Installing Python, virtualenv, Flask, and dependencies
-- Transferring project files via Git
-- Running the Flask app with `--host=0.0.0.0` to expose it to the web
-- Updating EC2 security groups to allow traffic on the desired port (e.g., 5000 or 5001)
-- Ensuring reliable public access without exposing sensitive IP information
+### ✅ Deployed on AWS EC2
+
+Deployment steps included:
+
+- Launching an Ubuntu-based EC2 instance  
+- Installing Python, virtual environment, Flask, and required packages  
+- Uploading project files using Git/GitHub  
+- Running the app using `flask run --host=0.0.0.0` to expose it externally  
+- Configuring EC2 **security group inbound rules** to allow traffic on the app’s port (e.g., 5000 or 5001)  
+
+This setup ensures scalable and secure cloud deployment for real-time inference.
 
 ---
 
@@ -63,11 +71,8 @@ Deployment to **AWS EC2** involved the following steps:
 
 ## 🖼️ Web App Screenshots
 
-### 📋 Input Page  
-![Input Form](images/form_page.png)
+> You can find the screenshots inside the `images/` folder of the repository:
 
-### 🌧️ Rain Prediction  
-![Rain Result](images/rain.png)
-
-### ☀️ Sunny Prediction  
-![Sunny Result](images/no_rain.png)
+- [Input Form Page](images/form_page.png)  
+- [Rainy Result Page](images/rain.png)  
+- [Sunny Result Page](images/no_rain.png)  
