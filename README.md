@@ -73,6 +73,6 @@ This setup ensures scalable and secure cloud deployment for real-time inference.
 
 > You can find the screenshots inside the `images/` folder of the repository:
 
-- [Input Form Page](images/form_page.png)  
+- [Input Form Page](images/index.png)  
 - [Rainy Result Page](images/rain.png)  
 - [Sunny Result Page](images/no_rain.png)  
